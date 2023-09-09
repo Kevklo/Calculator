@@ -1,6 +1,6 @@
-const num_btns = document.querySelectorAll(`#num_btn`);
+const numBtns = document.querySelectorAll(`#num_btn`);
 const display = document.querySelector(`#disp_num`);
-const disp_last = document.querySelector(`#disp_last`);
+const dispLast = document.querySelector(`#disp_last`);
 const addition = document.querySelector(`#add`);
 const substraction = document.querySelector(`#subs`);
 const multiplication = document.querySelector(`#mult`);
@@ -8,7 +8,7 @@ const division = document.querySelector(`#div`);
 const equals = document.querySelector(`#equals`);
 const cl = document.querySelector(`.clear`);
 const del = document.querySelector(`.del`);
-let curr_op = document.querySelector(`#curr_op`);
+let currOp = document.querySelector(`#curr_op`);
 let firstOpperand = null;
 let currentOperation = null;
 toclean = false;
@@ -24,15 +24,15 @@ function clear(){
   firstOpperand = null;
   currentOperation = null;
   display.textContent = 0;
-  disp_last.textContent = 0;
-  curr_op.textContent = '';
+  dispLast.textContent = 0;
+  currOp.textContent = '';
 }
 
 function CleanDisplay(){
   display.textContent = 0;
 }
 
-num_btns.forEach((button) =>
+numBtns.forEach((button) =>
   button.addEventListener('click', () => appendDigit(button.textContent))
 )
 
@@ -71,35 +71,35 @@ function opperate(operator){
     case null : {
       currentOperation = operator;
       firstOpperand = Number(display.textContent);
-      disp_last.textContent = firstOpperand;
-      curr_op.textContent = operator;
+      dispLast.textContent = firstOpperand;
+      currOp.textContent = operator;
       CleanDisplay();
       break;
     }
     case '+' : {
       let res = firstOpperand + Number(display.textContent);
       firstOpperand = res;
-      disp_last.textContent = res;
+      dispLast.textContent = res;
       currentOperation = operator;
-      curr_op.textContent = operator;
+      currOp.textContent = operator;
       CleanDisplay();
       break;
     }
     case '-' : {
       let res = firstOpperand - Number(display.textContent);
       firstOpperand = res;
-      disp_last.textContent = res;
+      dispLast.textContent = res;
       currentOperation = operator;
-      curr_op.textContent = operator;
+      currOp.textContent = operator;
       CleanDisplay();
       break;
     }
     case 'x' : {
       let res = firstOpperand * Number(display.textContent);
       firstOpperand = res;
-      disp_last.textContent = res;
+      dispLast.textContent = res;
       currentOperation = operator;
-      curr_op.textContent = operator;
+      currOp.textContent = operator;
       CleanDisplay();
       break;
     }
@@ -110,9 +110,9 @@ function opperate(operator){
       } else {
         let res = firstOpperand / Number(display.textContent);
         firstOpperand = res;
-        disp_last.textContent = res;
+        dispLast.textContent = res;
         currentOperation = operator;
-        curr_op.textContent = operator;
+        currOp.textContent = operator;
         CleanDisplay();
         break;
       }      
@@ -125,7 +125,7 @@ function eqs(){
     alert(`Cant divide by zero`);
   } else {
     opperate('=');
-    let res = disp_last.textContent;
+    let res = dispLast.textContent;
     clear();
     display.textContent = res;
     toclean = true;

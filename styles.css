@@ -151,3 +151,10 @@ button {
   box-shadow: 0 3px #666;
   transform: translateY(4px);
 }
+
+@media (max-width: 800px){
+  .device{
+    width: 80%;
+    aspect-ratio: 4/5;
+  }
+}
