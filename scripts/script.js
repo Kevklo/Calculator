@@ -9,7 +9,11 @@ function appendDigit(a){
     currentOperation = null;
   }
   if(display.textContent == '0'){
-    display.textContent = a;
+    if(a == '.'){
+      display.textContent += a;
+    } else {
+      display.textContent = a;
+    }
   } else if(a != '.' || !(display.textContent.includes('.'))){
     display.textContent += a
   }
