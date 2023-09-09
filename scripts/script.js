@@ -1,17 +1,19 @@
-const numBtns = document.querySelectorAll(`#num_btn`);
-const display = document.querySelector(`#disp_num`);
-const dispLast = document.querySelector(`#disp_last`);
-const addition = document.querySelector(`#add`);
-const substraction = document.querySelector(`#subs`);
-const multiplication = document.querySelector(`#mult`);
-const division = document.querySelector(`#div`);
-const equals = document.querySelector(`#equals`);
-const cl = document.querySelector(`.clear`);
-const del = document.querySelector(`.del`);
 let currOp = document.querySelector(`#curr_op`);
 let firstOpperand = null;
 let currentOperation = null;
 toclean = false;
+
+function appendDigit(a){
+  if(currentOperation == '='){
+    CleanDisplay();
+    currentOperation = null;
+  }
+  if(display.textContent == '0'){
+    display.textContent = a;
+  } else if(a != '.' || !(display.textContent.includes('.'))){
+    display.textContent += a
+  }
+}
 
 function deleteLast(){
   display.textContent = display.textContent.slice(0, -1);
@@ -32,6 +34,7 @@ function CleanDisplay(){
   display.textContent = 0;
 }
 
+
 numBtns.forEach((button) =>
   button.addEventListener('click', () => appendDigit(button.textContent))
 )
@@ -50,25 +53,20 @@ cl.addEventListener(`click`, clear);
 
 del.addEventListener(`click`, deleteLast);
 
-function appendDigit(a){
-  if(toclean == true){
-    CleanDisplay();
-    toclean = false;
-  }
-  if(display.textContent == '0'){
-    display.textContent = a;
-  } else {
-    display.textContent += a
-  }
-}
+coma.addEventListener(`click`, () => appendDigit('.'));
+
 
 function opperate(operator){
-  if(toclean == true){
-    CleanDisplay();
-    toclean = false;
-  }
   switch (currentOperation){
     case null : {
+      currentOperation = operator;
+      firstOpperand = Number(display.textContent);
+      dispLast.textContent = firstOpperand;
+      currOp.textContent = operator;
+      CleanDisplay();
+      break;
+    }
+    case '=' : {
       currentOperation = operator;
       firstOpperand = Number(display.textContent);
       dispLast.textContent = firstOpperand;
@@ -128,6 +126,6 @@ function eqs(){
     let res = dispLast.textContent;
     clear();
     display.textContent = res;
-    toclean = true;
+    currentOperation = '=';
   }
 }
